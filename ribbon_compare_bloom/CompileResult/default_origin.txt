@@ -1,0 +1,235 @@
+== Failure: 50 percent
+
+第0次迭代：
+计算num时间：0ms， 其中 num_to_add = 252, num_slots = 256
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.01587
+banding的时间：0ms， 此时添加了num_to_add个key：252banding占据数量252
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：0ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：0ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：2ms， 是否跳过0
+对比bloom的时间：0ms， 此时第0次迭代结束
+
+第1次迭代：
+计算num时间：0ms， 其中 num_to_add = 24379, num_slots = 24704
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.01333
+banding的时间：119ms， 此时添加了num_to_add个key：24379banding占据数量24379
+测试backtracking的时间：5ms，是否被跳过：0
+测试添加冗余key的时间：0ms
+soln求解的时间：14ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：29ms，是否被跳过：0, seed = 2
+查询已添加的key时间：62ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：13ms
+查询isoln 未添加的key，并计算fp 时间：4ms， 是否跳过0
+对比bloom的时间：1ms， 此时第1次迭代结束
+
+第2次迭代：
+计算num时间：0ms， 其中 num_to_add = 1140, num_slots = 1152
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.01053
+banding的时间：10ms， 此时添加了num_to_add个key：1140banding占据数量1140
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：0ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：0, seed = 3
+查询已添加的key时间：2ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第2次迭代结束
+
+第3次迭代：
+计算num时间：0ms， 其中 num_to_add = 162342, num_slots = 166144
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.02342
+banding的时间：173ms， 此时添加了num_to_add个key：162342banding占据数量162342
+测试backtracking的时间：37ms，是否被跳过：0
+测试添加冗余key的时间：7ms
+soln求解的时间：99ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：376ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第3次迭代结束
+
+第4次迭代：
+计算num时间：0ms， 其中 num_to_add = 7608, num_slots = 7680
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.00946
+banding的时间：51ms， 此时添加了num_to_add个key：7608banding占据数量7608
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：0ms
+soln求解的时间：3ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：28ms，是否被跳过：0, seed = 2
+查询已添加的key时间：15ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第4次迭代结束
+测试 reseed 是否符合预期的时间（测试逻辑不太懂）：0ms
+计算expand、single、batch、avg fp rate是否符合预期的时间（应该没啥计算量） ：0ms， 此时enum[0]结束
+
+Simple      outside query, hot, incl hashing, ns/key: 1296.65
+Interleaved outside query, hot, incl hashing, ns/key: 366.003
+Bloom       outside query, hot, incl hashing, ns/key: 96.8129
+Average re-seeds: 1.4
+Average expand failures, and overhead: 0.333333, 0.0516024
+Add'l single, failure rate: 0
+Add'l batch, success rate: 0.5 (>= 0)
+Average FP rate: 0.0047 (~= 0.00390625, <= 0.00476, >= 0.00306)
+
+
+== Failure: 5 percent
+
+第0次迭代：
+计算num时间：0ms， 其中 num_to_add = 248, num_slots = 256
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.03226
+banding的时间：0ms， 此时添加了num_to_add个key：248banding占据数量248
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：0ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：0ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：1ms， 是否跳过0
+对比bloom的时间：0ms， 此时第0次迭代结束
+
+第1次迭代：
+计算num时间：0ms， 其中 num_to_add = 24393, num_slots = 25088
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.02849
+banding的时间：26ms， 此时添加了num_to_add个key：24393banding占据数量24393
+测试backtracking的时间：26ms，是否被跳过：0
+测试添加冗余key的时间：1ms
+soln求解的时间：15ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：58ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第1次迭代结束
+
+第2次迭代：
+计算num时间：0ms， 其中 num_to_add = 1251, num_slots = 1280
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.02318
+banding的时间：3ms， 此时添加了num_to_add个key：1251banding占据数量1251
+测试backtracking的时间：0ms，是否被跳过：0
+测试添加冗余key的时间：0ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：2ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第2次迭代结束
+
+第3次迭代：
+计算num时间：0ms， 其中 num_to_add = 162316, num_slots = 168448
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.03778
+banding的时间：128ms， 此时添加了num_to_add个key：162316banding占据数量162316
+测试backtracking的时间：89ms，是否被跳过：0
+测试添加冗余key的时间：6ms
+soln求解的时间：101ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：373ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第3次迭代结束
+
+第4次迭代：
+计算num时间：0ms， 其中 num_to_add = 7625, num_slots = 7808
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.024
+banding的时间：29ms， 此时添加了num_to_add个key：7625banding占据数量7625
+测试backtracking的时间：12ms，是否被跳过：0
+测试添加冗余key的时间：0ms
+soln求解的时间：3ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：13ms，是否被跳过：0, seed = 1
+查询已添加的key时间：15ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第4次迭代结束
+测试 reseed 是否符合预期的时间（测试逻辑不太懂）：0ms
+计算expand、single、batch、avg fp rate是否符合预期的时间（应该没啥计算量） ：0ms， 此时enum[1]结束
+
+Simple      outside query, hot, incl hashing, ns/key: 1281.05
+Interleaved outside query, hot, incl hashing, ns/key: 349.492
+Bloom       outside query, hot, incl hashing, ns/key: 92.288
+Average re-seeds: 0.2
+Average expand failures, and overhead: 0, 0.0163934
+Add'l single, failure rate: 0
+Add'l batch, success rate: 1 (>= 0)
+Average FP rate: 0.00386 (~= 0.00390625, <= 0.00476, >= 0.00306)
+
+
+== Failure: 1/1000
+
+第0次迭代：
+计算num时间：0ms， 其中 num_to_add = 242, num_slots = 256
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.05785
+banding的时间：0ms， 此时添加了num_to_add个key：242banding占据数量242
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：0ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：0ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：1ms， 是否跳过0
+对比bloom的时间：0ms， 此时第0次迭代结束
+
+第1次迭代：
+计算num时间：0ms， 其中 num_to_add = 24387, num_slots = 25600
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.04974
+banding的时间：17ms， 此时添加了num_to_add个key：24387banding占据数量24387
+测试backtracking的时间：32ms，是否被跳过：0
+测试添加冗余key的时间：1ms
+soln求解的时间：15ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：56ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：13ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第1次迭代结束
+
+第2次迭代：
+计算num时间：0ms， 其中 num_to_add = 1229, num_slots = 1280
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.0415
+banding的时间：2ms， 此时添加了num_to_add个key：1229banding占据数量1229
+测试backtracking的时间：1ms，是否被跳过：0
+测试添加冗余key的时间：0ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：2ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：4ms， 是否跳过0
+对比bloom的时间：1ms， 此时第2次迭代结束
+
+第3次迭代：
+计算num时间：0ms， 其中 num_to_add = 162302, num_slots = 172032
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.05995
+banding的时间：96ms， 此时添加了num_to_add个key：162302banding占据数量162302
+测试backtracking的时间：118ms，是否被跳过：0
+测试添加冗余key的时间：6ms
+soln求解的时间：99ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：359ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第3次迭代结束
+
+第4次迭代：
+计算num时间：0ms， 其中 num_to_add = 7589, num_slots = 7936
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.04572
+banding的时间：11ms， 此时添加了num_to_add个key：7589banding占据数量7589
+测试backtracking的时间：5ms，是否被跳过：0
+测试添加冗余key的时间：0ms
+soln求解的时间：3ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：14ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：12ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第4次迭代结束
+测试 reseed 是否符合预期的时间（测试逻辑不太懂）：0ms
+计算expand、single、batch、avg fp rate是否符合预期的时间（应该没啥计算量） ：0ms， 此时enum[2]结束
+
+Simple      outside query, hot, incl hashing, ns/key: 1260.76
+Interleaved outside query, hot, incl hashing, ns/key: 346.598
+Bloom       outside query, hot, incl hashing, ns/key: 90.9896
+Average re-seeds: 0
+Average expand failures: N/A
+Add'l single, failure rate: 0
+Add'l batch, success rate: 1 (>= 0)
+Average FP rate: 0.0044 (~= 0.00390625, <= 0.00476, >= 0.00306)

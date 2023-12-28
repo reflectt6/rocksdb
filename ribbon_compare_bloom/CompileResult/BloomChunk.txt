@@ -1,0 +1,14 @@
+utilizationRate = 0.0518068
+bloom chunk size = 131kb
+save keys = 109306
+expected fp rate = 0.01
+construction time = 215ms
+overhead rate = 1.19913
+fp rate = 0.0084
+cnt = 10000
+fp_count = 84
+查询已插入的key，返回true的数量 = 0
+查询10000次 = 19ms
+查询已插入的key的时间 = 219ms
+
+建议和原生的第三次迭代对比

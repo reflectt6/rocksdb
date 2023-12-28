@@ -563,7 +563,7 @@ bool BandingAdd(BandingStorage *bs, typename BandingStorage::Index start,
   }
 
   for (;;) {
-    assert((cr & 1) == 1);
+    assert((cr & 1) == 1); // 入参 CoeffRow cr最低位必须等于1
     CoeffRow cr_at_i;
     ResultRow rr_at_i;
     bs->LoadRow(i, &cr_at_i, &rr_at_i, /* for_back_subst */ false);
@@ -774,12 +774,15 @@ void SimpleBackSubst(SimpleSolutionStorage *sss, const BandingStorage &bs) {
   // A column-major buffer of the solution matrix, containing enough
   // recently-computed solution data to compute the next solution row
   // (based also on banding data).
-  std::array<CoeffRow, kResultBits> state;
+  std::array<CoeffRow, kResultBits> state; // 这里是列式存储 代表S矩阵
   state.fill(0);
 
   const Index num_starts = bs.GetNumStarts();
   sss->PrepareForNumStarts(num_starts);
   const Index num_slots = num_starts + kCoeffBits - 1;
+
+//  bs.printCoeRow((int )num_slots);
+//  bs.printResultRow((int )num_slots);
 
   for (Index i = num_slots; i > 0;) {
     --i;
@@ -791,6 +794,9 @@ void SimpleBackSubst(SimpleSolutionStorage *sss, const BandingStorage &bs) {
     for (Index j = 0; j < kResultBits; ++j) {
       // Compute next solution bit at row i, column j (see derivation below)
       CoeffRow tmp = state[j] << 1;
+//      int c1 = BitParity(tmp & cr);
+//      int c2 = ((rr >> j) & 1);
+//      unsigned long long a = 1ULL;
       bool bit = (BitParity(tmp & cr) ^ ((rr >> j) & 1)) != 0;
       tmp |= bit ? CoeffRow{1} : CoeffRow{0};
 

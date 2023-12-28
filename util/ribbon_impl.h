@@ -5,8 +5,11 @@
 
 #pragma once
 
+#include <tiff.h>
+
 #include <cmath>
 
+#include "iostream"
 #include "port/port.h"  // for PREFETCH
 #include "util/fastrange.h"
 #include "util/ribbon_alg.h"
@@ -471,6 +474,22 @@ template <class TypesAndSettings>
 class StandardBanding : public StandardHasher<TypesAndSettings> {
  public:
   IMPORT_RIBBON_TYPES_AND_SETTINGS(TypesAndSettings);
+
+  void printCoeRow(const int n) const {
+    std::cout<< "下面开始输出系数矩阵："<<std::endl;
+    for (int i = 0; i < n; ++i) {
+      std::cout<< (uint64_t)coeff_rows_[i] <<std::endl;
+    }
+    std::cout<< "end" <<std::endl;
+  }
+
+  void printResultRow(int n) const {
+    std::cout<< "下面开始输出结果矩阵："<<std::endl;
+    for (int i = 0; i < n; ++i) {
+      std::cout<< (int)result_rows_[i] <<std::endl;
+    }
+    std::cout<< "end" <<std::endl;
+  }
 
   StandardBanding(Index num_slots = 0, Index backtrack_size = 0) {
     Reset(num_slots, backtrack_size);

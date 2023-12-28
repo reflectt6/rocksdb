@@ -1,0 +1,84 @@
+//ribbon_test.cc CompactnessAndBacktrackAndFpRate2
+
+struct tmpSettings : public DefaultTypesAndSettings {
+  static constexpr bool kHomogeneous = true;
+  static constexpr bool kUseSmash = false;
+  static const std::vector<ConstructionFailureChance>& FailureChanceToTest() {
+    return kFailureOnlyRare;
+  }
+};
+
+== Failure: 1/1000
+
+第0次迭代：
+计算num时间：0ms， 其中 num_to_add = 234, num_slots = 256
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.09402
+banding的时间：0ms， 此时添加了num_to_add个key：234banding占据数量234
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：0ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：0ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：13ms
+查询isoln 未添加的key，并计算fp 时间：2ms， 是否跳过0
+对比bloom的时间：0ms， 此时第0次迭代结束
+
+第1次迭代：
+计算num时间：0ms， 其中 num_to_add = 24379, num_slots = 25600
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.05008
+banding的时间：18ms， 此时添加了num_to_add个key：24379banding占据数量24379
+测试backtracking的时间：0ms，是否被跳过：0
+测试添加冗余key的时间：1ms
+soln求解的时间：16ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：57ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：13ms
+查询isoln 未添加的key，并计算fp 时间：4ms， 是否跳过0
+对比bloom的时间：1ms， 此时第1次迭代结束
+
+第2次迭代：
+计算num时间：0ms， 其中 num_to_add = 1221, num_slots = 1280
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.04832
+banding的时间：2ms， 此时添加了num_to_add个key：1221banding占据数量1221
+测试backtracking的时间：0ms，是否被跳过：0
+测试添加冗余key的时间：0ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：2ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：13ms
+查询isoln 未添加的key，并计算fp 时间：4ms， 是否跳过0
+对比bloom的时间：1ms， 此时第2次迭代结束
+
+第3次迭代：
+计算num时间：0ms， 其中 num_to_add = 162294, num_slots = 172032
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.06
+banding的时间：104ms， 此时添加了num_to_add个key：162294banding占据数量162294
+测试backtracking的时间：0ms，是否被跳过：0
+测试添加冗余key的时间：7ms
+soln求解的时间：113ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：393ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：13ms
+查询isoln 未添加的key，并计算fp 时间：3ms， 是否跳过0
+对比bloom的时间：1ms， 此时第3次迭代结束
+
+第4次迭代：
+计算num时间：0ms， 其中 num_to_add = 7581, num_slots = 7936
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.04683
+banding的时间：11ms， 此时添加了num_to_add个key：7581banding占据数量7581
+测试backtracking的时间：0ms，是否被跳过：0
+测试添加冗余key的时间：0ms
+soln求解的时间：4ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：15ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：13ms
+查询isoln 未添加的key，并计算fp 时间：4ms， 是否跳过0
+对比bloom的时间：1ms， 此时第4次迭代结束
+测试 reseed 是否符合预期的时间（测试逻辑不太懂）：0ms
+计算expand、single、batch、avg fp rate是否符合预期的时间（应该没啥计算量） ：0ms， 此时enum[2]结束
+
+Simple      outside query, hot, incl hashing, ns/key: 1357.32
+Interleaved outside query, hot, incl hashing, ns/key: 367.562
+Bloom       outside query, hot, incl hashing, ns/key: 99.8477
+Average expand failures: N/A
+Average FP rate: 0.00398 (~= 0.00390625, <= 0.00476, >= 0.00306)

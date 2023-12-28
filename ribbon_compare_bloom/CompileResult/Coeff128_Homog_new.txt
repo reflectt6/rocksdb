@@ -1,0 +1,101 @@
+// ribbon_compile_bloom.cc RepeatCompactnessAndBacktrackAndFpRate
+struct Settings_Coeff128_Homog : public DefaultTypesAndSettings {
+  // TODO 目前有两个问题需要解决
+  //  1、在这个参数下运行cell测试，求解器会崩溃，每次都返回true，待定位
+  //  2、cell运行贼慢，不知道为啥，不应该的
+  static constexpr bool kHomogeneous = true;
+  static constexpr bool kUseSmash = false;
+  using Key = Cell;
+  using KeyGen = HBaseKeyGen;
+  static Hash HashFn(const HBASE_BLOOM_NAMESPACE::Cell& key, uint64_t raw_seed) {
+    // This version 0.7.2 preview of XXH3 (a.k.a. XXPH3) function does
+    // not pass SmallKeyGen tests below without some seed premixing from
+    // StandardHasher. See https://github.com/Cyan4973/xxHash/issues/469
+    return ROCKSDB_NAMESPACE::Hash64(
+        reinterpret_cast<const char*>(key.cellArray), key.GetRowLength(), raw_seed);
+  }
+  static const std::vector<ConstructionFailureChance>& FailureChanceToTest() {
+    return kFailureOnlyRare;
+  }
+};
+
+
+1、banding、query过程性能劣化100倍，且不是由于reseed导致
+2、第0次迭代之后，大量报错，原因至少存在两个
+    （1）banding加入过量（超出容量的）key可以构建成功（这个不应该成功）
+    （2）banding过量key并且成功之后引发了query瘫痪，不管查什么都会返回true
+
+== Failure: 1/1000
+
+第0次迭代：
+计算num时间：0ms， 其中 num_to_add = 234, num_slots = 256
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.09402
+banding的时间：18ms， 此时添加了num_to_add个key：234banding占据数量234
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：2ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：17ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：380ms
+查询isoln 未添加的key，并计算fp 时间：373ms， 是否跳过0
+对比bloom的时间：0ms， 此时第0次迭代结束
+
+第1次迭代：
+计算num时间：0ms， 其中 num_to_add = 24379, num_slots = 25600
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.05008
+banding的时间：1804ms， 此时添加了num_to_add个key：24379banding占据数量24379
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：222ms
+soln求解的时间：15ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：1837ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：377ms
+查询isoln 未添加的key，并计算fp 时间：367ms， 是否跳过0
+对比bloom的时间：364ms， 此时第1次迭代结束
+
+第2次迭代：
+计算num时间：0ms， 其中 num_to_add = 1221, num_slots = 1280
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.04832
+banding的时间：90ms， 此时添加了num_to_add个key：1221banding占据数量1221
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：11ms
+soln求解的时间：0ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：91ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：378ms
+查询isoln 未添加的key，并计算fp 时间：369ms， 是否跳过0
+对比bloom的时间：365ms， 此时第2次迭代结束
+
+第3次迭代：
+计算num时间：0ms， 其中 num_to_add = 162294, num_slots = 172032
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.06
+banding的时间：11930ms， 此时添加了num_to_add个key：162294banding占据数量162294
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：1485ms
+soln求解的时间：99ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：12290ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：382ms
+查询isoln 未添加的key，并计算fp 时间：373ms， 是否跳过0
+对比bloom的时间：373ms， 此时第3次迭代结束
+
+第4次迭代：
+计算num时间：0ms， 其中 num_to_add = 7581, num_slots = 7936
+生成HBaseKey 定义soln时间：0ms， 其中 overhead_ratio = 1.04683
+banding的时间：567ms， 此时添加了num_to_add个key：7581banding占据数量7581
+测试backtracking的时间：0ms，是否被跳过：1
+测试添加冗余key的时间：70ms
+soln求解的时间：3ms，是否跳过isoln：0
+测试通过小幅度增加空间，是否可以增加banding的成功率的时间（expand）：0ms，是否被跳过：1, seed = 0
+查询已添加的key时间：576ms，是否跳过isoln：0
+查询soln 未添加的key，并计算fp 时间：381ms
+查询isoln 未添加的key，并计算fp 时间：373ms， 是否跳过0
+对比bloom的时间：368ms， 此时第4次迭代结束
+测试 reseed 是否符合预期的时间（测试逻辑不太懂）：0ms
+计算expand、single、batch、avg fp rate是否符合预期的时间（应该没啥计算量） ：0ms， 此时enum[2]结束
+
+Simple      outside query, hot, incl hashing, ns/key: 38019.6
+Interleaved outside query, hot, incl hashing, ns/key: 37150.9
+Bloom       outside query, hot, incl hashing, ns/key: 29461.3
+Average expand failures: N/A
+Average FP rate: 0.00414 (~= 0.00390625, <= 0.00476, >= 0.00306)
