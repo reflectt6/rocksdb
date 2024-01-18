@@ -1295,6 +1295,8 @@ int main(int argc, char** argv) {
   }
 
   StartPhase("filter");
+  // ribbon 实际使用的切入点， 在执行compact之后，有一个单独的线程会去生成ribbon
+  // 但是add range的入参很奇怪
   for (run = 1; run <= 4; run++) {
     // run=0 uses custom filter (not currently supported)
     // run=1 uses old block-based bloom filter
